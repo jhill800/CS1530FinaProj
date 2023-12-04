@@ -33,22 +33,29 @@ function retrieveItemsFromLocalStorage() {
         item.value = localStorage.getItem(item.key);
         console.log("Key:   " , item.key);
         console.log("Value: ", item.value);
-
+        item.categories = retrieveCategoriesFromLocalStorage(item.key);
         savedList.push(item);
-    }
-
-    console.log("Testing" , localStorage.key(0));
-    console.log("Testing" , localStorage.key(1));
-    console.log("Testing" , localStorage.key(2));   
+    } 
 
     return savedList
 } 
+
+function retrieveCategoriesFromLocalStorage(itemKey) {
+    // Retrieve categories for the given item key from local storage
+
+    let categoriesString = localStorage.getItem(itemKey + "_categories");
+
+    if (categoriesString) {
+        return categoriesString.split(",");
+    } else {
+        return [];
+    }
+}
  
-// my gift to you. I am giving this function ready to use   uncomment this for Version 2 
 function populateBudgetsList(data) { 
     
     for(let i=0; i<data.length; i++){
-        addItemToBudgetsListArea(data[i].key, data[i].value);
+        addItemToBudgetsListArea(data[i].key, data[i].value, data[i].categories);
     }
 } 
 

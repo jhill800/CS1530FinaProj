@@ -17,19 +17,22 @@
 
   <div class="container">
     <h2>Budgets</h2>
-    <div class="budget-input">
+    <a href="doc.html"><button>Make A Budget Here</button></a>
+    <!--<div class="budget-input">
       <input type="text" id="budgetText" placeholder="Enter budget text">
-      <button onclick="addBudget()">Add Budget</button>
-    </div>
+      <button onclick="linkToBudget()">Add Budget</button>
+    </div>-->
     <div id="budgetList"></div>
   </div>
 
   <script>
+ 
     function addExpense() {
       const expenseText = document.getElementById('expenseText').value;
       if (expenseText.trim() !== '') {
         businessLogic(expenseText, 'expenseList');
       }
+      //businessLogic(expenseText, 'expenseList');
     }
 
     function addBudget() {
@@ -40,12 +43,14 @@
     }
 
     function businessLogic(text, listTitle) {
+      //if (text.trim() !== '') {
       const list = document.getElementById(listTitle);
       const card = document.createElement('div');
       card.className = 'card';
       card.textContent = text;
       list.appendChild(card);
       document.getElementById(text).value = '';
+      //}
     }
   </script>
 </body>

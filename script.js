@@ -183,4 +183,7 @@ function deleteSelectedItems() {
             checkBoxList[i].parentElement.remove(); 
         } 
     } 
-} 
+}
+
+
+module.exports = { retrieveItemsFromLocalStorage };

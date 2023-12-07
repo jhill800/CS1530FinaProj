@@ -18,40 +18,51 @@
   <div class="container">
     <h2>Budgets</h2>
     <a href="doc.html"><button>Make A Budget Here</button></a>
-    <!--<div class="budget-input">
-      <input type="text" id="budgetText" placeholder="Enter budget text">
-      <button onclick="linkToBudget()">Add Budget</button>
-    </div>-->
     <div id="budgetList"></div>
   </div>
 
   <script>
- 
+    window.onload = function() { retrieveExpenses(); };
+
     function addExpense() {
       const expenseText = document.getElementById('expenseText').value;
       if (expenseText.trim() !== '') {
-        businessLogic(expenseText, 'expenseList');
-      }
-      //businessLogic(expenseText, 'expenseList');
-    }
-
-    function addBudget() {
-      const budgetText = document.getElementById('budgetText').value;
-      if (budgetText.trim() !== '') {
-        businessLogic(budgetText, 'budgetList');
+        displayExpenses(expenseText, 'expenseList');
+        storeExpense(expenseText);
+        clear(expenseText);
       }
     }
 
-    function businessLogic(text, listTitle) {
-      //if (text.trim() !== '') {
+    function displayExpenses(text, listTitle) {
       const list = document.getElementById(listTitle);
       const card = document.createElement('div');
       card.className = 'card';
       card.textContent = text;
       list.appendChild(card);
-      document.getElementById(text).value = '';
-      //}
     }
+
+    function storeExpense(text) {
+      let transactions = JSON.parse(localStorage.getItem('expenses'));
+      transactions.push(text);
+      localStorage.setItem('expenses', JSON.stringify(transactions));
+    }
+
+    function retrieveExpenses() {
+      const expenseList = document.getElementById('expenseList');
+      expenseList.innerHTML = '';
+      let expenses = JSON.parse(localStorage.getItem('expenses'));
+      expenses.forEach(function(expense) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = expense;
+        expenseList.appendChild(card);
+      });
+    }
+
+    function clear(expenseText) {
+      document.getElementById(expenseText).value = '';
+    }
+
   </script>
 </body>
 </html>

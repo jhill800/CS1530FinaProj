@@ -33,17 +33,17 @@
       }
     }
 
-    function displayExpenses(text, listTitle) {
+    function displayExpenses(expenseText, listTitle) {
       const list = document.getElementById(listTitle);
       const card = document.createElement('div');
       card.className = 'card';
-      card.textContent = text;
+      card.textContent = expenseText;
       list.appendChild(card);
     }
 
-    function storeExpense(text) {
+    function storeExpense(expenseText) {
       let transactions = JSON.parse(localStorage.getItem('expenses'));
-      transactions.push(text);
+      transactions.push(expenseText);
       localStorage.setItem('expenses', JSON.stringify(transactions));
     }
 
